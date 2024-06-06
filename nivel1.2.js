@@ -1,11 +1,11 @@
 import mongoose, { Schema, model } from "mongoose";
 
-// Esquema del Proveedor
+// Proveedor
 const proveedorSchema = new Schema({
     nombre: {
         type: String,
         required: [true, 'Nombre del proveedor es requerido'],
-        min:4
+        min: 4
     },
     direccion: {
         calle: { type: String, required: true },
@@ -19,7 +19,7 @@ const proveedorSchema = new Schema({
     telefono: {
         type: String,
         required: true,
-        min:9
+        min: 9
     },
     fax: {
         type: String,
@@ -28,18 +28,18 @@ const proveedorSchema = new Schema({
     nif: {
         type: String,
         required: true,
-        min:9
+        min: 9
     }
 });
 
 const Proveedor = model('Proveedor', proveedorSchema);
 
-// Para las gafas
+// Gafas
 const gafasSchema = new Schema({
     marca: {
         type: String,
         required: true,
-        min:3
+        min: 3
     },
     graduacionVidrios: {
         ojoIzquierdo: { type: String, required: true },
@@ -71,7 +71,7 @@ const gafasSchema = new Schema({
 
 const Gafas = model('Gafas', gafasSchema);
 
-// De clientes
+// Cliente
 const clienteSchema = new Schema({
     nombre: {
         type: String,
@@ -89,12 +89,11 @@ const clienteSchema = new Schema({
     telefono: {
         type: String,
         required: [true, "Telefono es requerido"],
-        min:9
+        min: 9
     },
     email: {
         type: String,
-        required: [true, "Email es requerido"],
-        min:5
+        required: [true, "Email es requerido"]
     },
     fechaRegistro: {
         type: Date,
@@ -103,41 +102,71 @@ const clienteSchema = new Schema({
     clienteRecomendado: {
         type: Schema.Types.ObjectId,
         ref: 'Cliente'
+    },
+    lastshopping: {
+        graduacionIzquierda: {
+            type: Number,
+            required: [true, "Graduación Izquierda es requerida"]
+        },
+        graduacionDerecha: {
+            type: Number,
+            required: [true, "Graduación Derecha es requerida"]
+        },
+        colorCristalDerecho: {
+            type: String,
+            required: [true, "El color del cristal derecho es requerido"]
+        },
+        colorCristalIzquierdo: {
+            type: String,
+            required: [true, "El color del cristal izquierdo es requerido"]
+        },
+        tipoMaterial: {
+            type: String,
+            required: true
+        },
+        precio: {
+            type: Number,
+            required: true
+        },
     }
 });
 
 const Cliente = model('Cliente', clienteSchema);
 
-// last shopping 
+// Last Shopping
 const lastShoppingSchema = new Schema({
-    graduacion_izquierda:{
-        type:Float,
-        required:[true, "Graduacion Izquierda es requerido"],
+    graduacionIzquierda: {
+        type: Number,
+        required: [true, "Graduación Izquierda es requerida"]
     },
-    graduacion_derecha:{
-        type:Float,
-        required:[true, "Graduacion Derecha es requerido"],
+    graduacionDerecha: {
+        type: Number,
+        required: [true, "Graduación Derecha es requerida"]
     },
-    color_cristal_derecha:{
-        type:String,
-        required:[true, "El color del cristal de la derecha es requerido"],
+    colorCristalDerecho: {
+        type: String,
+        required: [true, "El color del cristal derecho es requerido"]
     },
-    color_cristal_izquierda:{
-        type:String,
-        required:[true, "El color del cristal de la izquierda es requerido"],
+    colorCristalIzquierdo: {
+        type: String,
+        required: [true, "El color del cristal izquierdo es requerido"]
     },
-    tipo_material:{
-        type:String,
-        required:true
+    tipoMaterial: {
+        type: String,
+        required: true
     },
-    precio:Float,
-    cliente:{
-        type:Schema.Types.ObjectId,
-        ref:'cliente'
+    precio: {
+        type: Number,
+        required: true
+    },
+    cliente: {
+        type: Schema.Types.ObjectId,
+        ref: 'Cliente',
+        required: true
     }
-})
+});
 
-const lastShoppingModel = model('shopping', lastShoppingSchema);
+const LastShopping = model('LastShopping', lastShoppingSchema);
 
 // Ventas
 const ventaSchema = new Schema({
@@ -155,7 +184,6 @@ const ventaSchema = new Schema({
         type: String,
         required: true
     },
-    s
     fechaHoraVenta: {
         type: Date,
         default: Date.now
@@ -163,4 +191,3 @@ const ventaSchema = new Schema({
 });
 
 const Venta = model('Venta', ventaSchema);
-

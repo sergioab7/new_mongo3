@@ -102,6 +102,32 @@ const clienteSchema = new Schema({
     clienteRecomendado: {
         type: Schema.Types.ObjectId,
         ref: 'Cliente'
+    },
+    lastshopping: {
+        graduacionIzquierda: {
+            type: Number,
+            required: [true, "Graduación Izquierda es requerida"]
+        },
+        graduacionDerecha: {
+            type: Number,
+            required: [true, "Graduación Derecha es requerida"]
+        },
+        colorCristalDerecho: {
+            type: String,
+            required: [true, "El color del cristal derecho es requerido"]
+        },
+        colorCristalIzquierdo: {
+            type: String,
+            required: [true, "El color del cristal izquierdo es requerido"]
+        },
+        tipoMaterial: {
+            type: String,
+            required: true
+        },
+        precio: {
+            type: Number,
+            required: true
+        },
     }
 });
 
