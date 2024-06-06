@@ -63,9 +63,34 @@ const gafasSchema = new Schema({
         required: true
     },
     proveedor: {
-        type: Schema.Types.ObjectId,
-        ref: 'Proveedor',
-        required: true
+        nombre: {
+            type: String,
+            required: [true, 'Nombre del proveedor es requerido'],
+            min: 4
+        },
+        direccion: {
+            calle: { type: String, required: true },
+            numero: { type: Number, required: true },
+            piso: { type: Number, required: true },
+            puerta: { type: String, required: true },
+            ciudad: { type: String, required: true },
+            codigoPostal: { type: String, required: true },
+            pais: { type: String, required: true }
+        },
+        telefono: {
+            type: String,
+            required: true,
+            min: 9
+        },
+        fax: {
+            type: String,
+            required: true
+        },
+        nif: {
+            type: String,
+            required: true,
+            min: 9
+        }
     }
 });
 
@@ -160,9 +185,62 @@ const lastShoppingSchema = new Schema({
         required: true
     },
     cliente: {
-        type: Schema.Types.ObjectId,
-        ref: 'Cliente',
-        required: true
+        nombre: {
+            type: String,
+            required: [true, "Nombre es requerido"]
+        },
+        direccion: {
+            calle: { type: String, required: true },
+            numero: { type: Number, required: true },
+            piso: { type: Number, required: true },
+            puerta: { type: String, required: true },
+            ciudad: { type: String, required: true },
+            codigoPostal: { type: String, required: true },
+            pais: { type: String, required: true }
+        },
+        telefono: {
+            type: String,
+            required: [true, "Telefono es requerido"],
+            min: 9
+        },
+        email: {
+            type: String,
+            required: [true, "Email es requerido"]
+        },
+        fechaRegistro: {
+            type: Date,
+            default: Date.now
+        },
+        clienteRecomendado: {
+            type: Schema.Types.ObjectId,
+            ref: 'Cliente'
+        },
+        lastshopping: {
+            graduacionIzquierda: {
+                type: Number,
+                required: [true, "Graduación Izquierda es requerida"]
+            },
+            graduacionDerecha: {
+                type: Number,
+                required: [true, "Graduación Derecha es requerida"]
+            },
+            colorCristalDerecho: {
+                type: String,
+                required: [true, "El color del cristal derecho es requerido"]
+            },
+            colorCristalIzquierdo: {
+                type: String,
+                required: [true, "El color del cristal izquierdo es requerido"]
+            },
+            tipoMaterial: {
+                type: String,
+                required: true
+            },
+            precio: {
+                type: Number,
+                required: true
+            },
+        }
     }
 });
 
